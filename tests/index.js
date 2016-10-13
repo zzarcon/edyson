@@ -22,7 +22,7 @@ const init = () => {
 };
 
 const onError = (e) => {
-  console.log('onError', error);
+  console.log('onError', e);
 };
 
 const onChange = (e) => {

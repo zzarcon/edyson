@@ -7,7 +7,6 @@ class Jsonedy extends HTMLPreElement {
     this.editable = this.getAttribute('editable') || true;
     this.contentEditable = this.editable;
     this._json = null;
-    this.isErrored = false;
     this.initialValue = '';
     this.currentValue = null;
     this.addEvents();
@@ -30,19 +29,25 @@ class Jsonedy extends HTMLPreElement {
 
   onKeydown() {
     const currentValue = this.textContent;
-    const hasValueChanged = this.currentValue !== currentValue && currentValue !== this.initialValue;
-
-    if (!hasValueChanged) return;
+    const isInitialValue = currentValue === this.initialValue;
+    const valueHasChanged = this.currentValue !== currentValue;
 
     this.currentValue = currentValue;
+
+    if (isInitialValue) {
+      this.removeAttr('errored');
+      return;
+    }
+
+    if (!valueHasChanged) return;
 
     try {
       const json = JSON.parse(currentValue);
 
+      this.removeAttr('errored');
       this.triggerEvent('change', {json});
     } catch (e) {
-      //TODO: add attribute to reflect the 'error' status
-      this.isErrored = true;
+      this.setAttr('errored', true);
       this.triggerEvent('error');
     }
   }
@@ -53,11 +58,23 @@ class Jsonedy extends HTMLPreElement {
     this.dispatchEvent(event);
   }
 
+  setAttr(attrName, value) {
+    !this.hasAttribute(attrName) && this.setAttribute(attrName, value);
+  }
+
+  removeAttr(attrName) {
+    this.hasAttribute(attrName) && this.removeAttribute(attrName);
+  }
+
   get json() {
     return this._json;
   }
 
   set json(data) {
+    if (typeof data !== 'object') {
+      throw new Error(`json needs to be an object, received ${typeof data}`);
+    }
+
     const jsonText = this.serialize(data);
 
     this._json = data;
