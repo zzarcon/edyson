@@ -9,12 +9,15 @@ body {
   font-family: monospace;
   background-color: #e16a3d; }
 
+ul {
+  list-style: none; }
+
 pre {
   text-align: left;
   display: inline-block;
   padding: 5px;
   overflow: auto;
-  height: calc(100vh - 40px);
+  height: calc(100vh - 70px);
   background-color: #473431;
   color: #7ea072;
   outline-width: 0;
@@ -34,3 +37,36 @@ pre {
     font-size: 16px;
     padding: 5px 0;
     font-weight: bold; }
+
+header {
+  display: flex;
+  padding-bottom: 10px;
+  justify-content: center; }
+  header h1 {
+    margin-right: 10px; }
+  header a {
+    display: none; }
+
+.editor-options {
+  background-color: #322422;
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  text-align: left;
+  color: #ccc;
+  border-radius: 3px;
+  font-family: Verdana;
+  padding: 15px;
+  border: 1px solid #b59797; }
+  .editor-options li {
+    border-bottom: 1px solid #423f3e;
+    padding: 5px 0; }
+    .editor-options li:last-child {
+      border-bottom: none; }
+
+#indentation {
+  width: 35px;
+  text-align: center;
+  border-radius: 3px;
+  border: none;
+  padding: 3px; }
