@@ -12,13 +12,24 @@ const demoJson = {
     }
   }
 };
+let edyson;
+
 const init = () => {
-  const element = document.querySelector('#demo');
+  edyson = document.querySelector('#demo');
 
-  element.addEventListener('error', onError);
-  element.addEventListener('change', onChange);
+  edyson.addEventListener('error', onError);
+  edyson.addEventListener('change', onChange);
+  document.getElementById('change-indentation').addEventListener('click', onIndentationChange);
+  document.getElementById('save').addEventListener('click', onSave);
+  edyson.json = demoJson;
+};
 
-  element.json = demoJson;
+const onSave = () => {
+  edyson.save();
+};
+
+const onIndentationChange = () => {
+  edyson.indentation = 4;
 };
 
 const onError = (e) => {

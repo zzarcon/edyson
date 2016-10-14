@@ -5,9 +5,9 @@
 class Edyson extends HTMLPreElement {
   attachedCallback() {
     this.editable = this.getAttribute('editable') || true;
-    this.indentation = this.getAttribute('indentation') || 2;
     this.contentEditable = this.editable;
     this._json = null;
+    this._indentation = null
     this.initialValue = '';
     this.currentValue = null;
     this.addEvents();
@@ -45,6 +45,7 @@ class Edyson extends HTMLPreElement {
     try {
       const json = JSON.parse(currentValue);
 
+      this._json = json;
       this.removeAttr('errored');
       this.triggerEvent('change', {json});
     } catch (e) {
@@ -65,6 +66,24 @@ class Edyson extends HTMLPreElement {
 
   removeAttr(attrName) {
     this.hasAttribute(attrName) && this.removeAttribute(attrName);
+  }
+
+  save() {
+    if (this.hasAttribute('errored')) {
+      throw new Error(`You can't save an errored json`);
+    }
+
+    this.initialValue = this.serialize(this._json);
+  }
+
+  get indentation() {
+    return this._indentation || this.getAttribute('indentation') || 2;
+  }
+
+  set indentation(value) {
+    this._indentation = value;
+    //Triggers serialization with the new indentation
+    this.json = this._json;
   }
 
   get json() {
