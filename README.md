@@ -1,2 +1,2 @@
-# edyson
-Web Component that allows you edit any object 
+# Edyson
+>💡 Visually edit any json object - powered by Web Components ™️
