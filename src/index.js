@@ -2,7 +2,7 @@
  * TODO: Handle styles
  */
 
-class Jsonedy extends HTMLPreElement {
+class Edyson extends HTMLPreElement {
   attachedCallback() {
     this.editable = this.getAttribute('editable') || true;
     this.indentation = this.getAttribute('indentation') || 2;
@@ -91,9 +91,9 @@ class Jsonedy extends HTMLPreElement {
   }
 }
 
-document.registerElement('json-edy', {
-  prototype: Jsonedy.prototype,
+document.registerElement('edy-son', {
+  prototype: Edyson.prototype,
   extends: 'pre'
 });
 
-module.exports = Jsonedy;
+module.exports = Edyson;
