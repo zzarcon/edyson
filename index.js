@@ -1,24 +1,17 @@
-require('../src');
+/**
+ * TODO: Reflect if has errors
+ * TODO: Reflect 'editable'
+ */
 
-const demoJson = {
-  user: {
-    name: 'hector',
-    lastName: 'zarco'
-  },
-  location: {
-    country: {
-      name: 'Spain',
-      city: 'Valencia'
-    }
-  }
-};
+require('jsonedy');
+
 const init = () => {
-  const element = document.querySelector('#demo');
+  const element = document.querySelector('#config');
 
   element.addEventListener('error', onError);
   element.addEventListener('change', onChange);
 
-  element.json = demoJson;
+  element.json = jsonConfig;
 };
 
 const onError = (e) => {

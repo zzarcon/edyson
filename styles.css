@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  padding: 20px;
+  text-align: center;
+  font-family: monospace;
+  background-color: #e16a3d; }
+
+pre {
+  text-align: left;
+  display: inline-block;
+  padding: 5px;
+  overflow: auto;
+  height: calc(100vh - 40px);
+  background-color: #473431;
+  color: #7ea072;
+  outline-width: 0;
+  border-radius: 2px;
+  position: relative;
+  padding-top: 35px; }
+  pre:before {
+    content: 'package.json';
+    background-color: #fafafa;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    color: #555;
+    text-shadow: 1px 1px white;
+    font-size: 16px;
+    padding: 5px 0;
+    font-weight: bold; }
