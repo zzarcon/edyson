@@ -5,6 +5,7 @@
 class Jsonedy extends HTMLPreElement {
   attachedCallback() {
     this.editable = this.getAttribute('editable') || true;
+    this.indentation = this.getAttribute('indentation') || 2;
     this.contentEditable = this.editable;
     this._json = null;
     this.initialValue = '';
@@ -20,7 +21,7 @@ class Jsonedy extends HTMLPreElement {
   }
 
   serialize(json) {
-    return JSON.stringify(json, null, 2);
+    return JSON.stringify(json, null, this.indentation);
   }
 
   clear() {
