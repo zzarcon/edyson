@@ -1,5 +1,5 @@
 {
-  "name": "jsonedy-demo",
+  "name": "edyson-demo",
   "version": "0.0.0",
   "description": "Web Component that allows you edit any object",
   "main": "src/index.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zzarcon/jsonedy.git"
+    "url": "git+https://github.com/zzarcon/edyson.git"
   },
   "author": "zzarcon",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zzarcon/jsonedy/issues"
+    "url": "https://github.com/zzarcon/edyson/issues"
   },
-  "homepage": "https://github.com/zzarcon/jsonedy#readme",
+  "homepage": "https://github.com/zzarcon/edyson#readme",
   "devDependencies": {
     "browserify": "^13.1.0",
     "node-sass": "^3.10.1",
@@ -25,6 +25,6 @@
     "watchify": "^3.7.0"
   },
   "dependencies": {
-    "jsonedy": "^0.1.1"
+    "edyson": "^0.1.1"
   }
 }

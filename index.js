@@ -3,7 +3,7 @@
  * TODO: Reflect 'editable'
  */
 
-require('jsonedy');
+require('edyson');
 
 const init = () => {
   const element = document.querySelector('#config');
