@@ -1,26 +1,52 @@
 /**
- * TODO: Reflect if has errors
- * TODO: Reflect 'editable'
+ * TODO: Reflect if has errors -> handle initialValue event
+ * TODO: Save changes
  */
 
 require('edyson');
 
+let edyson, errorStatus;
+
 const init = () => {
-  const element = document.querySelector('#config');
+  edyson = document.getElementById('config');
+  errorStatus = document.getElementById('error-status');
 
-  element.addEventListener('error', onError);
-  element.addEventListener('change', onChange);
+  document.getElementById('editable').addEventListener('change', onEditChange);
+  document.getElementById('indentation').addEventListener('change', onIndentation);
+  document.getElementById('indentation').addEventListener('keyup', onIndentation);
+  document.getElementById('save').addEventListener('click', onSaveChanges);
 
-  element.json = jsonConfig;
+  edyson.addEventListener('error', onError);
+  edyson.addEventListener('initialValue', onInitialValue);
+  edyson.addEventListener('change', onChange);
+
+  edyson.json = jsonConfig;
+};
+
+const onSaveChanges = () => {
+  edyson.save();
+};
+
+const onIndentation = function() {
+  edyson.indentation = this.value;
+};
+
+const onInitialValue = () => {
+  errorStatus.textContent = '✅';
+};
+
+const onEditChange = function() {
+  edyson.editable = this.checked;
 };
 
 const onError = (e) => {
-  console.log('onError', e);
+  errorStatus.textContent = '❌';
 };
 
 const onChange = (e) => {
   const json = e.detail;
 
+  errorStatus.textContent = '✅';
   console.log('onChange', json);
 };
 

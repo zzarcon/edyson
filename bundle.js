@@ -1,27 +1,53 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
- * TODO: Reflect if has errors
- * TODO: Reflect 'editable'
+ * TODO: Reflect if has errors -> handle initialValue event
+ * TODO: Save changes
  */
 
 require('edyson');
 
+let edyson, errorStatus;
+
 const init = () => {
-  const element = document.querySelector('#config');
+  edyson = document.getElementById('config');
+  errorStatus = document.getElementById('error-status');
 
-  element.addEventListener('error', onError);
-  element.addEventListener('change', onChange);
+  document.getElementById('editable').addEventListener('change', onEditChange);
+  document.getElementById('indentation').addEventListener('change', onIndentation);
+  document.getElementById('indentation').addEventListener('keyup', onIndentation);
+  document.getElementById('save').addEventListener('click', onSaveChanges);
 
-  element.json = jsonConfig;
+  edyson.addEventListener('error', onError);
+  edyson.addEventListener('initialValue', onInitialValue);
+  edyson.addEventListener('change', onChange);
+
+  edyson.json = jsonConfig;
+};
+
+const onSaveChanges = () => {
+  edyson.save();
+};
+
+const onIndentation = function() {
+  edyson.indentation = this.value;
+};
+
+const onInitialValue = () => {
+  errorStatus.textContent = '✅';
+};
+
+const onEditChange = function() {
+  edyson.editable = this.checked;
 };
 
 const onError = (e) => {
-  console.log('onError', e);
+  errorStatus.textContent = '❌';
 };
 
 const onChange = (e) => {
   const json = e.detail;
 
+  errorStatus.textContent = '✅';
   console.log('onChange', json);
 };
 
