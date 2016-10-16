@@ -4,6 +4,7 @@
 
 class Edyson extends HTMLPreElement {
   attachedCallback() {
+    console.log('attachedCallback');
     this.editable = this.getAttribute('editable') || true;
     this.contentEditable = this.editable;
     this._json = null;

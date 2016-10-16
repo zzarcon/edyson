@@ -6,7 +6,9 @@
   "scripts": {
     "watch": "watchify tests/index.js -o tests/test_bundle.js -v",
     "serve": "serve",
-    "release": "npm version patch && npm publish && git push --tags && git push"
+    "release": "npm version patch && npm publish && git push --tags && git push",
+    "test": "ava -v",
+    "test:watch": "ava -w -v"
   },
   "repository": {
     "type": "git",
@@ -19,8 +21,19 @@
   },
   "homepage": "https://github.com/zzarcon/edyson#readme",
   "devDependencies": {
+    "ava": "^0.16.0",
+    "browser-env": "^2.0.11",
     "browserify": "^13.1.0",
+    "document-register-element": "^1.2.0",
     "serve": "^1.4.0",
-    "watchify": "^3.7.0"
+    "skatejs-web-components": "^1.2.1",
+    "watchify": "^3.7.0",
+    "webcomponents.js": "^0.7.22"
+  },
+  "ava": {
+    "require": [
+      "./test/helpers/setup-browser-env.js",
+      "./node_modules/webcomponents.js/webcomponents.js"
+    ]
   }
 }
